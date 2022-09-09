@@ -1,0 +1,98 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Exceptn_Handling;
+
+namespace Exceptn_Handling
+{
+    interface ICloneable
+    {
+        MyStack CloneStack();
+    }
+    internal class StackException : Exception
+    {
+        public StackException(string message) : base(message)
+        {
+
+        }
+    }
+    class MyStack : ICloneable
+    {
+        private int [] Arr;
+        private int Size;
+        private int Index;
+
+        public MyStack(int size)
+        {
+            Size = size;
+            Arr = new int[Size];
+            Index = 0;
+        }
+
+        public MyStack CloneStack()
+        {
+            MyStack stack = new MyStack(this.Size);
+            foreach(int x in this.Arr)
+            {
+                stack.Push(x);
+            }
+            return stack;
+        }
+
+        public void Push(int x)
+        {
+            if (Index < Size)
+            {
+                Arr[Index++] = x;
+            }
+            else throw new StackException("\n\tThe Stack Is Full.");
+        }
+
+        public void Pop()
+        {
+            if (Index > 0)
+            {
+                Index--;
+            }
+            else throw new StackException("\n\tThe Stack Is Empty.");
+        }       
+    }
+}
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        int n;
+        Console.WriteLine("Enter What will be the Size of Stack: ");
+        n = Convert.ToInt32(Console.ReadLine());
+        MyStack stack = new MyStack(n);
+        while (true)
+        {
+            Console.WriteLine("\n 1. Push\n 2. Pop\n 3. Exit\n Enter Operation: ");
+            int select = Convert.ToInt32(Console.ReadLine());
+            if (select == 3) break;
+            if (select == 1)
+            {
+                Console.WriteLine(" Enter The Number: ");
+                int x = Convert.ToInt32(Console.ReadLine());
+                try
+                {
+                    stack.Push(x);
+                }
+                catch (StackException ex) { Console.WriteLine(ex.Message); }
+            }
+            if (select == 2)
+            {
+                try
+                {
+                    stack.Pop();
+                }
+                catch (StackException ex) { Console.WriteLine(ex.Message); }
+            }
+        }
+    }
+}
+
