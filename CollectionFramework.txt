@@ -1,0 +1,77 @@
+using System;
+
+class Collection
+{
+    public static void DisplayInt(int[] a)
+    {
+        for (int i = 0; i < a.Length; i++)
+        {
+            Console.WriteLine(a[i]);
+        }
+    }
+    public static void DisplayStr(string[] a)
+    {
+        for (int i = 0; i < a.Length; i++)
+        {
+            Console.WriteLine(a[i]);
+        }
+    }
+    static void Main(string[] args)
+    {
+        int[] a;
+        String[] b;
+        Console.WriteLine("Enter the length of the array you want for integer :");
+        int n1 = int.Parse(Console.ReadLine());
+        a = new int[n1];
+        Console.WriteLine("Enter the length of the array you want for string :");
+        int n2 = int.Parse(Console.ReadLine());
+        b = new String[n2];
+
+        Console.WriteLine("Enter the Integer values :");
+        for (int i = 0; i < n1; i++)
+        {
+            a[i] = int.Parse(Console.ReadLine());
+        }
+        Console.WriteLine("Enter the Strings you want to insert");
+        for (int i = 0; i < n2; i++)
+        {
+            b[i] = Console.ReadLine();
+        }
+
+        //Q.Copy Operation
+        Console.WriteLine("Coping the values of the arrays c and d");
+        int[] c = new int[n1];
+        string[] d = new string[n2];
+        Array.Copy(a, c, n1);
+        Array.Copy(b, d, n2);
+        Console.WriteLine("copying the integer array: ");
+        DisplayInt(c);
+        Console.WriteLine("copying the string array: ");
+        DisplayStr(d);
+
+        //Sort Operation
+        Console.WriteLine("After sorting ");
+        Array.Sort(a);
+        Array.Sort(b);
+        Console.WriteLine("\n\nAfter sorting the integer array");
+        DisplayInt(a);
+        Console.WriteLine("After sorting the string array");
+        DisplayStr(b);
+
+        //Clear Operation
+        Console.WriteLine("After clearing ");
+        Array.Clear(a);
+        Array.Clear(b);
+        DisplayInt(a);
+        DisplayStr(b);
+
+        //Reverse Operation
+        
+        Array.Reverse(c);
+        Array.Reverse(d);
+        Console.WriteLine("\n\nAfter reversing the integer array ");
+        DisplayInt(c);
+        Console.WriteLine("After reversing the string array ");
+        DisplayStr(d);
+    }
+}

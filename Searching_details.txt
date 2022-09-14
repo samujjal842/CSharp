@@ -1,0 +1,172 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
+using OOPAssignment;
+
+namespace OOPAssignment
+{
+    public class Employee_details
+    {
+        public int EmpNo { get; set; }
+        public string EmpName { get; set; }
+        public double Salary { get; set; }
+        public double HRA;
+        public double TA;
+        public double DA { get; set; }
+        public double PF { get; set; }
+        public double TDS { get; set; }
+        public double NetSalary = 0;
+        public double GrossSalary = 0;
+
+        public Employee_details(int emp_No, string emp_Name, double salary)
+        {
+            EmpNo = emp_No;
+            EmpName = emp_Name;
+            Salary = salary;
+        }
+        public void Gross_salary()
+        {
+            if (Salary < 5000)
+            {
+
+                HRA = 0.1 * Salary;
+                TA = 0.05 * Salary;
+                DA = 0.15 * Salary;
+            }
+            else if (Salary < 10000)
+            {
+
+                HRA = 0.15 * Salary;
+                TA = 0.1 * Salary;
+                DA = 0.2 * Salary;
+            }
+            else if (Salary < 15000)
+            {
+
+                HRA = 0.2 * Salary;
+                TA = 0.15 * Salary;
+                DA = 0.25 * Salary;
+            }
+            else if (Salary < 20000)
+            {
+
+                HRA = 0.25 * Salary;
+                TA = 0.2 * Salary;
+                DA = 0.30 * Salary;
+            }
+            else if (Salary >= 20000)
+            {
+
+                HRA = 0.3 * Salary;
+                TA = 0.25 * Salary;
+                DA = 0.35 * Salary;
+            }
+
+            GrossSalary = Salary + HRA + TA + DA;
+            PF = 0.1 * GrossSalary;
+            TDS = 0.18 * GrossSalary;
+        }
+        public virtual void CalculateSalary()
+        {
+
+            NetSalary = GrossSalary - (PF + TDS);
+
+        }
+
+        public class Manager : Employee_details
+        {
+            private double PetrolAllowance;
+            private double FoodAllowance;
+            private double OtherAllowances;
+            public Manager(int emp_No, string emp_Name, double salary) : base(emp_No, emp_Name, salary)
+            {
+                PetrolAllowance = 0.08 * Salary;
+                FoodAllowance = 0.13 * Salary;
+                OtherAllowances = 0.03 * Salary;
+
+            }
+            public override void CalculateSalary()
+            {
+                base.Gross_salary();
+                GrossSalary = GrossSalary + PetrolAllowance + FoodAllowance + OtherAllowances;
+                NetSalary = GrossSalary - (PF + TDS);
+                Console.WriteLine("Gross Salary of Manager :{0}", GrossSalary);
+                Console.WriteLine("NetSalary of Manager : {0}", NetSalary);
+            }
+        }
+        public class MarketingExecutive : Employee_details
+        {
+            private double KilometerTravel;
+            private double TourAllowance;
+            private double TelephoneAllowance = 1000;
+            public MarketingExecutive(int empNo, string empName, double salary, double kilometerTravel) : base(empNo, empName, salary)
+            {
+                KilometerTravel = kilometerTravel;
+                TourAllowance = 5 * KilometerTravel;
+            }
+            public override void CalculateSalary()
+            {
+                base.Gross_salary();
+                GrossSalary = GrossSalary + TourAllowance + TelephoneAllowance;
+                NetSalary = GrossSalary - (PF + TDS);
+                Console.WriteLine("Gross Salary of Marketing Executive :{0}", GrossSalary);
+                Console.WriteLine("NetSalary of Marketing Executive1 : {0}", NetSalary);
+            }
+
+        }
+    }
+
+
+}
+
+class Employee
+{
+    static void Main(string[] args)
+    {
+        Employee_details e1 = new Employee_details(12, "Tina", 10000);
+        Employee_details e2 = new Employee_details(14, "Hena", 19000);
+        Employee_details e3 = new Employee_details(16, "Goku", 11000);
+        Employee_details e4 = new Employee_details(18, "Romu", 17000);
+
+
+        List<Employee_details> a = new List<Employee_details>();
+        a.Add(e1);
+        a.Add(e2);
+        a.Add(e3);
+        a.Add(e4);
+
+        Console.WriteLine("The old list :");
+        foreach (Employee_details e in a)
+        {
+            Console.WriteLine(e.EmpNo + " " + e.EmpName + " " + e.Salary);
+        }
+        Console.WriteLine("\n\nTotal number of Employees in the list: {0}", a.Count);
+        Employee_details e5 = new Employee_details(20, "Somu", 15500);
+        a.Add(e5);
+        Console.WriteLine("\n\nThe new list :");
+        foreach (Employee_details e in a)
+        {
+            Console.WriteLine(e.EmpNo + " " + e.EmpName + " " + e.Salary);
+        }
+        Console.WriteLine("\n\nTotal number of Employees in the list: {0}", a.Count);
+
+        Console.Write("\nEnter name to be searched : ");
+        string name = Console.ReadLine();
+
+        Employee_details emp = a.Find(x => x.EmpName == name);
+        if (emp == null)
+        {
+            Console.WriteLine(name + " does not exist in the list");
+        }
+        else
+        {
+            Console.WriteLine("Id = {0}, Name = {1}, Salary = {2}", emp.EmpNo, emp.EmpName, emp.Salary);
+        }
+    }
+}
+

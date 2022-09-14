@@ -1,0 +1,61 @@
+using System;
+using System.Collections;
+
+
+namespace Player_details
+{
+    class Player
+    {
+        public string PlayerName { get; set; }
+        public int RunScored { get; set; }
+    }
+
+    class Team : IEnumerable
+    {
+        public int n { get; set; }
+        public Player[] player;
+        int i = 0;
+
+        public Team(int n)
+        {
+            this.n = n;
+            player = new Player[n];
+        }
+
+        public void Add(Player p)
+        {
+            player[i] = p;
+            i++;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return player.GetEnumerator();
+        }
+    }
+
+    internal class Program
+    {
+        public static void Main()
+        {
+            Console.Write("Enter number of players you want to add : ");
+            int n = int.Parse(Console.ReadLine());
+            Team India = new Team(n);
+
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write("Enter player {0} name : ", i + 1);
+                string name = Console.ReadLine();
+                Console.Write("Enter the runs scored : ");
+                int runScore = int.Parse(Console.ReadLine());
+                Player player = new Player { PlayerName = name, RunScored = runScore };
+                India.Add(player);
+
+            }
+            foreach (Player p in India)
+            {
+                Console.WriteLine("Name = {0}, Run scored = {1}", p.PlayerName, p.RunScored);
+            }
+        }
+    }
+}
