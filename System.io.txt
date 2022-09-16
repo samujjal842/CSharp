@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+
+namespace directory
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Create Method  
+            String path = @"E:\File1.txt";
+            DirectoryInfo dir = new DirectoryInfo(path);
+            dir.Create();
+            {
+                Console.WriteLine("Directory has been created");
+            }
+
+            //// CreateSubdirectory Method  
+
+            //String path = @"E:\File1.txt";
+            //DirectoryInfo dir = new DirectoryInfo(path);
+            //DirectoryInfo dis = dir.CreateSubdirectory("File2");
+            //{
+            //    Console.WriteLine("Directory has been created");
+            //}
+            //// MoveTo Method  
+
+            //String path = @"E:\File1.txt";
+            //string path1 = @"E:\NewFile1.txt";
+            //DirectoryInfo dir = new DirectoryInfo(path);
+            //DirectoryInfo f2 = new DirectoryInfo(path1);
+            //dir.MoveTo(path1);
+            //{
+            //    Console.WriteLine("Directory has been Moved");
+            //}
+
+            //// Delete Method  
+
+            //string path = @"E:\NewFile1.txt";
+            //DirectoryInfo dir = new DirectoryInfo(path);
+            //dir.Delete();
+            //{
+            //    Console.WriteLine("Directory has been deleted");
+            //}
+
+            //// Create File Method
+
+            //FileInfo fi = new FileInfo(@"E:\MyTestFile7.txt");
+            //FileStream fs = fi.Create();
+            //Console.WriteLine("File has been created");
+
+            ////CreateText File Method
+
+            //FileInfo fi = new FileInfo(@"E:\MyTestFilecreatetext1.txt");
+            //StreamWriter str = fi.CreateText();
+            //str.WriteLine("Hello");
+            //Console.WriteLine("File has been created with text");
+            //str.Close();
+
+            ////Delete File Method
+
+            //FileInfo fi = new FileInfo(@"E:\MyTestFilecreatetext.txt");
+            //fi.Delete();
+            //Console.WriteLine("File has been deleted");
+
+            //// MoveTo File Method
+
+            //string path = @"E:\NewFile1.txt";
+            //string path2 = @"E:\NewFile1.txt";
+            //FileInfo fi1 = new FileInfo(path);
+            //FileInfo fi2 = new FileInfo(path2);
+            //fi1.MoveTo(path2);
+            //Console.WriteLine("{0} was moved to {1}.", path, path2);
+
+            ////ApendText File Method
+
+            //FileInfo fi = new FileInfo(@"E:\NewFile1.txt");
+            //StreamWriter sw = fi.AppendText();
+            //sw.WriteLine("Statement 1");
+            //sw.WriteLine("Statement 2");
+            //sw.WriteLine("Statement 3");
+            //Console.WriteLine("File has been appended");
+            //sw.Close();
+        }
+    }
+}
